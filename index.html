@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satvik Swad — Pure Food. Pure Devotion.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #F7F0DF;
+    --cream-panel: #FCF7EA;
+    --green: #2E4A2F;
+    --green-deep: #1D3220;
+    --terracotta: #C1652F;
+    --terracotta-deep: #A34E22;
+    --brown: #4A2C1B;
+    --gold: #C79A3E;
+    --gold-soft: #E4C77E;
+    --ink: #3A2A1D;
+    --shadow: rgba(74,44,27,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{ font-family:'Cormorant Garamond', serif; }
+  .script{ font-family:'Dancing Script', cursive; }
+
+  a{ text-decoration:none; color:inherit; }
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+
+  /* ---------- texture bg ---------- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(199,154,62,0.06), transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(46,74,47,0.06), transparent 35%),
+      radial-gradient(circle at 75% 80%, rgba(193,101,47,0.06), transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+
+  /* ---------- leaf corner decorations ---------- */
+  .leaf-corner{
+    position:absolute; width:150px; height:150px; opacity:0.5; pointer-events:none;
+  }
+  .leaf-corner.tl{ top:0; left:0; transform:rotate(0deg); }
+  .leaf-corner.tr{ top:0; right:0; transform:scaleX(-1); }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,240,223,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(74,44,27,0.12);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brandmark{ display:flex; align-items:center; gap:12px; }
+  .brandmark svg{ width:44px; height:44px; flex-shrink:0; }
+  .brand-name{ line-height:1; }
+  .brand-name .satvik{ font-size:20px; font-weight:700; color:var(--green); letter-spacing:0.5px; display:block;}
+  .brand-name .swad{ font-size:22px; color:var(--terracotta); margin-top:-2px; display:block;}
+
+  .nav-links{ display:flex; align-items:center; gap:32px; }
+  .nav-links a:not(.btn){
+    font-size:14px; letter-spacing:0.5px; color:var(--brown); font-weight:500;
+    position:relative; padding-bottom:4px;
+  }
+  .nav-links a:not(.btn)::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--terracotta);
+    transition:width .3s ease;
+  }
+  .nav-links a:not(.btn):hover::after{ width:100%; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--green); color:var(--cream-panel);
+    padding:11px 22px; border-radius:30px; font-size:14px; font-weight:600;
+    letter-spacing:0.3px;
+    box-shadow:0 6px 16px rgba(46,74,47,0.25);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    border:none; cursor:pointer;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(46,74,47,0.32); background:var(--green-deep); }
+  .btn.terracotta{ background:var(--terracotta); box-shadow:0 6px 16px rgba(193,101,47,0.3); }
+  .btn.terracotta:hover{ background:var(--terracotta-deep); box-shadow:0 10px 22px rgba(193,101,47,0.38); }
+  .btn svg{ width:18px; height:18px; }
+
+  /* mobile nav toggle - simplified: hide links on small screens except order button */
+  @media(max-width:760px){
+    .nav-links a:not(.btn){ display:none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:90px 0 70px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:13px; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--terracotta); font-weight:600; margin-bottom:26px;
+  }
+  .hero .eyebrow::before, .hero .eyebrow::after{
+    content:""; width:28px; height:1px; background:var(--terracotta); opacity:0.6;
+  }
+
+  .emblem{ width:180px; height:180px; margin:0 auto 30px; position:relative; }
+  .emblem .flame{ transform-origin: 100px 78px; animation: flicker 2.6s ease-in-out infinite; }
+  @keyframes flicker{
+    0%,100%{ transform: scaleY(1) scaleX(1) rotate(0deg); opacity:1;}
+    25%{ transform: scaleY(1.08) scaleX(0.95) rotate(-2deg); opacity:0.92;}
+    50%{ transform: scaleY(0.94) scaleX(1.05) rotate(2deg); opacity:1;}
+    75%{ transform: scaleY(1.05) scaleX(0.97) rotate(-1deg); opacity:0.95;}
+  }
+  .emblem .ring{ animation: rotate-ring 60s linear infinite; transform-origin:100px 100px; }
+  @keyframes rotate-ring{ to{ transform:rotate(360deg); } }
+
+  h1.title{
+    font-size:clamp(48px,8vw,84px);
+    line-height:1.02;
+    font-weight:700;
+    color:var(--green);
+  }
+  h1.title .swad-word{
+    display:block;
+    font-family:'Dancing Script', cursive;
+    color:var(--terracotta);
+    font-size:clamp(56px,10vw,104px);
+    font-weight:700;
+    margin-top:-6px;
+  }
+  .tagline{
+    margin-top:18px; font-size:17px; letter-spacing:1px; color:var(--brown);
+    font-weight:500;
+  }
+  .hero-sub{
+    max-width:520px; margin:22px auto 38px; font-size:16px; line-height:1.7; color:#5a4633;
+  }
+  .hero-ctas{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  /* ---------- badge strip ---------- */
+  .badge-strip{
+    background:var(--green);
+    padding:22px 0;
+  }
+  .badge-strip .wrap{
+    display:flex; justify-content:space-around; flex-wrap:wrap; gap:18px;
+    text-align:center;
+  }
+  .badge{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    color:var(--cream); font-size:12.5px; letter-spacing:0.5px; font-weight:500;
+    max-width:130px;
+  }
+  .badge svg{ width:30px; height:30px; opacity:0.95; }
+
+  /* ---------- section heading pattern ---------- */
+  .section{ padding:90px 0; position:relative; }
+  .section-head{ text-align:center; max-width:620px; margin:0 auto 56px; }
+  .section-head .kicker{
+    font-family:'Dancing Script',cursive; color:var(--terracotta); font-size:26px; display:block; margin-bottom:6px;
+  }
+  .section-head h2{ font-size:clamp(34px,5vw,50px); color:var(--green); font-weight:700; }
+  .section-head p{ margin-top:14px; color:#5a4633; font-size:15.5px; line-height:1.7; }
+
+  .divider{ display:flex; justify-content:center; margin:14px 0 0; }
+  .divider svg{ width:120px; height:24px; opacity:0.8; }
+
+  /* ---------- cookie cards ---------- */
+  .cookie-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:26px;
+  }
+  @media(max-width:920px){ .cookie-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:520px){ .cookie-grid{ grid-template-columns:1fr;} }
+
+  .cookie-card{
+    background:var(--cream-panel);
+    border:2px solid var(--ring-color, var(--gold));
+    border-radius:50% / 42%;
+    padding:38px 22px 30px;
+    text-align:center;
+    position:relative;
+    transition:transform .35s ease, box-shadow .35s ease;
+    box-shadow:0 10px 24px rgba(74,44,27,0.08);
+  }
+  .cookie-card:hover{ transform:translateY(-8px) scale(1.02); box-shadow:0 18px 34px rgba(74,44,27,0.18); }
+  .cookie-card .eggless{
+    position:absolute; top:16px; right:18px;
+    font-size:8.5px; letter-spacing:0.4px; text-transform:uppercase;
+    border:1px solid var(--ring-color, var(--gold)); color:var(--ring-color, var(--gold));
+    border-radius:50%; width:44px; height:44px;
+    display:flex; align-items:center; justify-content:center; text-align:center; line-height:1.1;
+    font-weight:700;
+  }
+  .cookie-card .icon{ width:56px; height:56px; margin:0 auto 14px; color:var(--ring-color, var(--gold)); }
+  .cookie-card h3{
+    font-size:23px; color:var(--brown); font-weight:700; letter-spacing:0.3px;
+  }
+  .cookie-card .sub{
+    margin-top:6px; font-size:11.5px; letter-spacing:1px; text-transform:uppercase; color:var(--ring-color, var(--terracotta)); font-weight:600;
+  }
+
+  /* ---------- muffins ---------- */
+  .muffin-band{ background:var(--brown); color:var(--cream); }
+  .muffin-band .section-head h2{ color:var(--cream); }
+  .muffin-band .section-head .kicker{ color:var(--gold-soft); }
+  .muffin-band .section-head p{ color:#e3d5c3; }
+
+  .muffin-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  @media(max-width:800px){ .muffin-grid{ grid-template-columns:1fr; } }
+  .muffin-card{
+    background:rgba(247,240,223,0.06);
+    border:1px solid rgba(228,199,126,0.35);
+    border-radius:18px;
+    padding:34px 26px;
+    text-align:center;
+    transition:background .3s ease, transform .3s ease;
+  }
+  .muffin-card:hover{ background:rgba(247,240,223,0.12); transform:translateY(-6px); }
+  .muffin-card .icon{ width:60px; height:60px; margin:0 auto 16px; color:var(--gold-soft); }
+  .muffin-card h3{ font-size:24px; font-weight:700; }
+  .muffin-card p{ margin-top:10px; font-size:14px; line-height:1.6; color:#d9c9b3; }
+
+  /* ---------- values ---------- */
+  .values-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+  }
+  @media(max-width:800px){ .values-grid{ grid-template-columns:1fr; } }
+  .value{
+    text-align:center; padding:10px 18px;
+  }
+  .value .icon{
+    width:64px; height:64px; margin:0 auto 20px;
+    border-radius:50%; background:var(--cream-panel);
+    display:flex; align-items:center; justify-content:center;
+    border:1.5px solid var(--gold);
+    color:var(--terracotta);
+  }
+  .value .icon svg{ width:30px; height:30px; }
+  .value h3{ font-size:22px; color:var(--green); font-weight:700; }
+  .value p{ margin-top:10px; font-size:14.5px; line-height:1.7; color:#5a4633; }
+
+  /* ---------- how to order ---------- */
+  .order-section{ background:var(--cream-panel); }
+  .steps{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px; position:relative;
+  }
+  @media(max-width:800px){ .steps{ grid-template-columns:1fr; } }
+  .step{
+    background:var(--cream); border-radius:20px; padding:36px 26px;
+    text-align:center; position:relative;
+    box-shadow:0 8px 20px rgba(74,44,27,0.08);
+  }
+  .step .num{
+    font-family:'Dancing Script',cursive; font-size:44px; color:var(--gold);
+    display:block; margin-bottom:10px;
+  }
+  .step h3{ font-size:20px; color:var(--brown); font-weight:700; }
+  .step p{ margin-top:8px; font-size:14px; color:#5a4633; line-height:1.6; }
+
+  /* ---------- final CTA ---------- */
+  .final-cta{
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+    color:var(--cream);
+    text-align:center;
+    padding:90px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .final-cta h2{ font-size:clamp(32px,5vw,48px); font-weight:700; margin-bottom:16px; }
+  .final-cta .script{ color:var(--gold-soft); font-size:clamp(30px,4vw,40px); display:block; margin-bottom:6px;}
+  .final-cta p{ max-width:480px; margin:0 auto 32px; font-size:15.5px; color:#dce6dc; line-height:1.7; }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--brown); color:#e3d5c3; padding:50px 0 24px; }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px;
+    padding-bottom:34px; border-bottom:1px solid rgba(228,199,126,0.2);
+  }
+  .footer-brand .brand-name .satvik{ color:var(--cream); }
+  .footer-brand .brand-name .swad{ color:var(--gold-soft); }
+  .footer-brand p{ margin-top:12px; font-size:13.5px; max-width:260px; line-height:1.7; color:#c9b79f; }
+  .footer-links h4{ font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-soft); margin-bottom:14px; }
+  .footer-links a{ display:block; font-size:14px; margin-bottom:10px; color:#e3d5c3; opacity:0.85; }
+  .footer-links a:hover{ opacity:1; }
+  .footer-bottom{
+    text-align:center; padding-top:22px; font-size:12.5px; color:#a89179; letter-spacing:0.3px;
+  }
+
+  /* ---------- floating whatsapp ---------- */
+  .float-wa{
+    position:fixed; bottom:26px; right:26px; z-index:60;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 22px rgba(0,0,0,0.25);
+    animation: pulse-wa 2.6s ease-in-out infinite;
+  }
+  .float-wa svg{ width:28px; height:28px; fill:#fff; }
+  @keyframes pulse-wa{
+    0%,100%{ box-shadow:0 8px 22px rgba(37,211,102,0.35); }
+    50%{ box-shadow:0 8px 30px rgba(37,211,102,0.6); }
+  }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <nav class="wrap">
+    <div class="brandmark">
+      <svg viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="47" stroke="#C79A3E" stroke-width="3"/>
+        <path d="M50 28 C 46 34, 46 40, 50 46 C 54 40, 54 34, 50 28 Z" fill="#C79A3E" opacity="0.8"/>
+        <path d="M35 62 Q50 50 65 62" stroke="#2E4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="50" cy="55" r="10" fill="none" stroke="#C1652F" stroke-width="2"/>
+      </svg>
+      <div class="brand-name">
+        <span class="satvik">SATVIK</span>
+        <span class="swad script">Swad</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#cookies">Cookies</a>
+      <a href="#muffins">Muffins</a>
+      <a href="#values">Our Promise</a>
+      <a href="#order">How to Order</a>
+      <a class="btn terracotta" href="https://wa.me/919999999999?text=Hi%20Satvik%20Swad!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.3 4.86L2 22l5.34-1.4a9.9 9.9 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.17.83.85-3.1-.2-.32a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.28-8.24 2.21 0 4.28.86 5.84 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.55-3.7 8.28-8.26 8.28Zm4.53-6.2c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.12.17 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+        Order Now
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <svg class="leaf-corner tl" viewBox="0 0 150 150" fill="none">
+    <path d="M10 10 C 40 20, 60 40, 55 90" stroke="#2E4A2F" stroke-width="2" fill="none" opacity="0.5"/>
+    <ellipse cx="30" cy="30" rx="14" ry="7" fill="#4d7a4f" opacity="0.35" transform="rotate(35 30 30)"/>
+    <ellipse cx="45" cy="55" rx="14" ry="7" fill="#4d7a4f" opacity="0.3" transform="rotate(55 45 55)"/>
+  </svg>
+  <svg class="leaf-corner tr" viewBox="0 0 150 150" fill="none">
+    <path d="M10 10 C 40 20, 60 40, 55 90" stroke="#2E4A2F" stroke-width="2" fill="none" opacity="0.5"/>
+    <ellipse cx="30" cy="30" rx="14" ry="7" fill="#4d7a4f" opacity="0.35" transform="rotate(35 30 30)"/>
+    <ellipse cx="45" cy="55" rx="14" ry="7" fill="#4d7a4f" opacity="0.3" transform="rotate(55 45 55)"/>
+  </svg>
+
+  <div class="wrap">
+    <span class="eyebrow">Homemade · Jaipur</span>
+
+    <div class="emblem">
+      <svg viewBox="0 0 200 200" fill="none">
+        <circle class="ring" cx="100" cy="100" r="88" stroke="#C79A3E" stroke-width="3" stroke-dasharray="6 5"/>
+        <circle cx="100" cy="100" r="76" stroke="#C79A3E" stroke-width="1.5" opacity="0.6"/>
+        <!-- diya base -->
+        <path d="M62 128 C62 148, 138 148, 138 128 C138 118, 118 118, 100 122 C82 118, 62 118, 62 128 Z" fill="#8a4a25"/>
+        <ellipse cx="100" cy="128" rx="38" ry="7" fill="#a5602f"/>
+        <!-- flame -->
+        <g class="flame">
+          <path d="M100 60 C 92 76, 88 88, 100 100 C 112 88, 108 76, 100 60 Z" fill="#E8A33D"/>
+          <path d="M100 74 C 96 84, 94 90, 100 96 C 106 90, 104 84, 100 74 Z" fill="#F6D97A"/>
+        </g>
+        <!-- lotus petals under diya -->
+        <path d="M70 132 Q100 148 130 132" stroke="#C1652F" stroke-width="2" fill="none" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <h1 class="title reveal in">
+      Satvik
+      <span class="swad-word">Swad</span>
+    </h1>
+    <p class="tagline">PURE FOOD &nbsp;·&nbsp; PURE DEVOTION</p>
+    <p class="hero-sub">A home bakery where every cookie and muffin is rolled, baked and packed by hand — 100% vegetarian, satvik, and made with no shortcuts. Just real ingredients and a little bhakti.</p>
+
+    <div class="hero-ctas">
+      <a class="btn terracotta" href="https://wa.me/919999999999?text=Hi%20Satvik%20Swad!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.3 4.86L2 22l5.34-1.4a9.9 9.9 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.17.83.85-3.1-.2-.32a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.28-8.24 2.21 0 4.28.86 5.84 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.55-3.7 8.28-8.26 8.28Z"/></svg>
+        DM to Order on WhatsApp
+      </a>
+      <a class="btn" href="#cookies" style="background:transparent;color:var(--green);border:1.5px solid var(--green); box-shadow:none;">
+        See the Menu
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BADGES ================= -->
+<div class="badge-strip">
+  <div class="wrap">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C7 6 4 10 4 14a8 8 0 0 0 16 0c0-4-3-8-8-12Z"/><path d="M12 8c-1.5 2-2.5 4-2.5 5.8A2.5 2.5 0 0 0 12 16.3"/></svg>
+      100% Vegetarian Satvik
+    </div>
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+      No Preservatives Added
+    </div>
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M6.5 12.5C4 15 3 17.5 4 20h16c1-2.5 0-5-2.5-7.5"/></svg>
+      Eggless Recipes
+    </div>
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19h16M6 19V9l6-5 6 5v10"/><path d="M10 19v-5h4v5"/></svg>
+      Baked at Home
+    </div>
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="9" width="13" height="8" rx="1"/><path d="M15 12h3l3 3v2h-6z"/><circle cx="6.5" cy="19" r="1.6"/><circle cx="16.5" cy="19" r="1.6"/></svg>
+      Delivered to Your Door
+    </div>
+  </div>
+</div>
+
+<!-- ================= COOKIES ================= -->
+<section class="section" id="cookies">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Crispy, buttery & simply irresistible</span>
+      <h2>Our Cookie Jar</h2>
+      <p>Seven flavours, one promise — rolled and baked fresh in small batches, never sitting in a warehouse. Pick a jar or mix your own box.</p>
+      <div class="divider">
+        <svg viewBox="0 0 120 24" fill="none"><path d="M2 12h40M78 12h40" stroke="#C79A3E" stroke-width="1.2"/><path d="M60 4c-6 0-9 5-9 8s3 8 9 8 9-5 9-8-3-8-9-8Z" stroke="#C1652F" stroke-width="1.2" fill="none"/></svg>
+      </div>
+    </div>
+
+    <div class="cookie-grid">
+      <!-- Coconut -->
+      <div class="cookie-card reveal" style="--ring-color:#7C8B3D">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/></svg>
+        <h3>Coconut</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- Chocolate -->
+      <div class="cookie-card reveal" style="--ring-color:#5A3324">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/><circle cx="20" cy="18" r="1.4" fill="currentColor" stroke="none"/><circle cx="27" cy="22" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <h3>Caffeine&#8209;Free Chocolate</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- Butter -->
+      <div class="cookie-card reveal" style="--ring-color:#D9A441">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/></svg>
+        <h3>Butter</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- Oats -->
+      <div class="cookie-card reveal" style="--ring-color:#A98F63">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/></svg>
+        <h3>Oats</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- Atta -->
+      <div class="cookie-card reveal" style="--ring-color:#C1652F">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/></svg>
+        <h3>Atta</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- Ragi -->
+      <div class="cookie-card reveal" style="--ring-color:#6B3350">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/></svg>
+        <h3>Ragi</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- Peanut Butter -->
+      <div class="cookie-card reveal" style="--ring-color:#A5672E">
+        <span class="eggless">EGG<br>LESS</span>
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="20" r="9"/><circle cx="17" cy="30" r="9"/><circle cx="31" cy="30" r="9"/></svg>
+        <h3>Peanut Butter</h3>
+        <div class="sub">Pure · Satvik · Delicious</div>
+      </div>
+      <!-- CTA card -->
+      <div class="cookie-card reveal" style="--ring-color:#2E4A2F; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6v36M6 24h36"/></svg>
+        <h3 style="font-size:19px;">Build Your Own Box</h3>
+        <div class="sub">Mix any 3 flavours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MUFFINS ================= -->
+<section class="section muffin-band" id="muffins">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Soft, moist & full of happiness</span>
+      <h2>Fresh Baked Muffins</h2>
+      <p>Baked to order in small trays, so they reach you still soft in the middle. Perfect for breakfast, prasad boxes, or a quiet cup of chai.</p>
+    </div>
+    <div class="muffin-grid">
+      <div class="muffin-card reveal">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 20 L14 44 H34 L38 20"/><path d="M8 20c0-6 7-10 16-10s16 4 16 10c0 3-4 4-16 4s-16-1-16-4Z"/><circle cx="18" cy="16" r="1.3" fill="currentColor" stroke="none"/><circle cx="24" cy="13" r="1.3" fill="currentColor" stroke="none"/><circle cx="30" cy="17" r="1.3" fill="currentColor" stroke="none"/></svg>
+        <h3>Double Chocolate</h3>
+        <p>Rich cocoa batter studded with chocolate chunks.</p>
+      </div>
+      <div class="muffin-card reveal">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 20 L14 44 H34 L38 20"/><path d="M8 20c0-6 7-10 16-10s16 4 16 10c0 3-4 4-16 4s-16-1-16-4Z"/><path d="M18 14 22 11 26 14 30 11" stroke-linecap="round"/></svg>
+        <h3>Almond Crunch</h3>
+        <p>Toasted almond flakes over a soft vanilla crumb.</p>
+      </div>
+      <div class="muffin-card reveal">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 20 L14 44 H34 L38 20"/><path d="M8 20c0-6 7-10 16-10s16 4 16 10c0 3-4 4-16 4s-16-1-16-4Z"/><circle cx="20" cy="15" r="1.3" fill="currentColor" stroke="none"/><circle cx="28" cy="16" r="1.3" fill="currentColor" stroke="none"/></svg>
+        <h3>Choco Chip</h3>
+        <p>The everyday favourite — light, fluffy, chip in every bite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VALUES ================= -->
+<section class="section" id="values">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Why Satvik Swad</span>
+      <h2>Made With Love & Devotion</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C7 6 4 10 4 14a8 8 0 0 0 16 0c0-4-3-8-8-12Z"/></svg></div>
+        <h3>Pure Ingredients</h3>
+        <p>No onion, no garlic, no preservatives — every batch stays true to satvik principles, start to finish.</p>
+      </div>
+      <div class="value reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.6-9.5-9C.9 8.4 3 4.5 7 4.5c2 0 3.7 1.2 5 3 1.3-1.8 3-3 5-3 4 0 6.1 3.9 4.5 7.5C19 16.4 12 21 12 21Z"/></svg></div>
+        <h3>Baked With Bhakti</h3>
+        <p>Every jar is hand-rolled at home in small batches — no factory lines, just care in every step.</p>
+      </div>
+      <div class="value reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M7 7V5a5 5 0 0 1 10 0v2"/></svg></div>
+        <h3>No Shortcuts</h3>
+        <p>Fresh dairy, real butter, and honest measures — nothing artificial, nothing rushed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW TO ORDER ================= -->
+<section class="section order-section" id="order">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">It only takes a minute</span>
+      <h2>How to Order</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <h3>DM on WhatsApp</h3>
+        <p>Tap the order button and send us a message — tell us what you're craving.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <h3>Pick Your Flavours</h3>
+        <p>Choose from our cookie jars and muffin trays, or build a mixed box.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <h3>Freshly Baked & Delivered</h3>
+        <p>We bake to order and deliver straight to your doorstep, still warm with love.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final-cta">
+  <div class="wrap">
+    <span class="script">Ready to taste it?</span>
+    <h2>DM Us on WhatsApp to Order</h2>
+    <p>Freshly baked, always satvik, delivered with love — right to your door.</p>
+    <a class="btn terracotta" href="https://wa.me/919999999999?text=Hi%20Satvik%20Swad!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.3 4.86L2 22l5.34-1.4a9.9 9.9 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Z"/></svg>
+      Message Us Now
+    </a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-name">
+          <span class="satvik">SATVIK</span>
+          <span class="swad script">Swad</span>
+        </div>
+        <p>Pure Food. Pure Devotion. A home bakery serving eggless, satvik cookies & muffins — baked fresh, delivered with care.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Menu</h4>
+        <a href="#cookies">Cookies</a>
+        <a href="#muffins">Muffins</a>
+        <a href="#values">Our Promise</a>
+      </div>
+      <div class="footer-links">
+        <h4>Order</h4>
+        <a href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp Us</a>
+        <a href="#order">How It Works</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Satvik Swad Home Bakery &nbsp;·&nbsp; Freshly Baked With Love
+    </div>
+  </div>
+</footer>
+
+<!-- ================= FLOATING WHATSAPP ================= -->
+<a class="float-wa" href="https://wa.me/919999999999?text=Hi%20Satvik%20Swad!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.3 4.86L2 22l5.34-1.4a9.9 9.9 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.17.83.85-3.1-.2-.32a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.28-8.24 2.21 0 4.28.86 5.84 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.55-3.7 8.28-8.26 8.28Zm4.53-6.2c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.12.17 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+</a>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold:0.15 });
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+</script>
+
+</body>
+</html>
