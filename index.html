@@ -129,7 +129,7 @@
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 320px 1fr;
+            grid-template-columns: 340px 1fr;
             gap: 15px;
             margin-top: 15px;
         }
@@ -161,6 +161,7 @@
             overflow: hidden;
             border-radius: 8px;
             margin-bottom: 12px;
+            background-color: #FAF6F0;
         }
 
         .promo-banner-img {
@@ -172,7 +173,7 @@
         }
 
         .sidebar-card:hover .promo-banner-img {
-            transform: scale(1.04);
+            transform: scale(1.03);
         }
 
         .tabs-header {
@@ -476,20 +477,28 @@
             margin-bottom: 4px;
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #DDD5CE;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            background: var(--bg-light);
             transition: border-color 0.2s, box-shadow 0.2s;
             outline: none;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             border-color: var(--accent) !important;
             box-shadow: 0 0 0 3px rgba(198, 139, 89, 0.2);
+            background: #FFFFFF;
         }
 
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.55);
             backdrop-filter: blur(4px);
             display: flex;
             justify-content: center;
@@ -510,12 +519,14 @@
             background: var(--surface);
             padding: 24px;
             border-radius: 14px;
-            max-width: 400px;
+            max-width: 440px;
             width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
         .modal-overlay.active .modal {
@@ -524,11 +535,11 @@
 
         .close-modal {
             position: absolute;
-            top: 12px;
-            right: 15px;
+            top: 14px;
+            right: 16px;
             background: none;
             border: none;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             cursor: pointer;
             color: var(--text-muted);
             transition: color 0.2s, transform 0.2s;
@@ -576,7 +587,7 @@
             <div class="sidebar-card">
                 <div>
                     <div class="promo-banner-container">
-                        <img src="WhatsApp Image 2026-08-06 at 10.02.10 PM.jpeg" alt="Satvik Swad Promo" class="promo-banner-img" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80'">
+                        <img src="bannerss.jpeg" alt="Satvik Swad Promo Banner" class="promo-banner-img" onerror="this.src='WhatsApp Image 2026-08-06 at 10.02.10 PM.jpeg'">
                     </div>
                     <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--primary);">Freshly Baked Satvik Treats</h3>
                     <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Made fresh to order with premium pure ingredients and zero preservatives.</p>
@@ -869,23 +880,34 @@
         </footer>
     </div>
 
+    <!-- Enhanced Order Modal -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal">
             <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h3 style="color: var(--primary); font-family: 'Playfair Display', serif; margin-bottom: 8px;">Complete Order</h3>
-            <p style="font-size: 0.8rem; margin-bottom: 12px; color: var(--text-muted);" id="modal-item-summary">Order Details</p>
+            <h3 style="color: var(--primary); font-family: 'Playfair Display', serif; margin-bottom: 6px;">Order Details</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 15px; color: var(--text-muted); font-weight: 500;" id="modal-item-summary">Order Details</p>
 
             <div class="form-group">
-                <label for="cust-name">Your Name</label>
-                <input type="text" id="cust-name" placeholder="Enter your name" style="width:100%; padding: 8px; border-radius:6px; border:1px solid #DDD5CE;">
+                <label for="cust-name">Your Full Name *</label>
+                <input type="text" id="cust-name" placeholder="Enter your full name" required>
             </div>
 
             <div class="form-group">
-                <label for="cust-note">Special Instructions</label>
-                <input type="text" id="cust-note" placeholder="e.g. Delivery date, message on cake" style="width:100%; padding: 8px; border-radius:6px; border:1px solid #DDD5CE;">
+                <label for="cust-phone">Mobile / Contact Number *</label>
+                <input type="tel" id="cust-phone" placeholder="Enter 10-digit mobile number" required>
             </div>
 
-            <button class="cta-btn" style="width: 100%; margin-top: 10px;" onclick="sendWhatsAppMessage()">Send to WhatsApp 🚀</button>
+            <div class="form-group">
+                <label for="cust-address">Delivery Address (with Landmark) *</label>
+                <textarea id="cust-address" rows="2" placeholder="House/Flat No., Street, Area, Landmark, City" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="cust-note">Special Instructions (Optional)</label>
+                <input type="text" id="cust-note" placeholder="e.g. Delivery date, eggless preferences">
+            </div>
+
+            <button class="cta-btn" style="width: 100%; margin-top: 10px;" onclick="sendWhatsAppMessage()">Place Order on WhatsApp 🚀</button>
         </div>
     </div>
 
@@ -928,13 +950,13 @@
             const priceText = packSelect.options[packSelect.selectedIndex].text;
 
             currentOrderDetails = `Hello Satvik Swad! I would like to order: *${itemName}* (${priceText}).`;
-            document.getElementById('modal-item-summary').innerText = `Item: ${itemName} (${priceText})`;
+            document.getElementById('modal-item-summary').innerText = `🛒 Item: ${itemName} (${priceText})`;
             openModal();
         }
 
         function openGeneralOrderModal() {
-            currentOrderDetails = "Hello Satvik Swad! I would like to inquire about your products.";
-            document.getElementById('modal-item-summary').innerText = "General Order Inquiry";
+            currentOrderDetails = "Hello Satvik Swad! I would like to place an order / inquire about your bakes.";
+            document.getElementById('modal-item-summary').innerText = "🛍️ General Order Inquiry";
             openModal();
         }
 
@@ -952,11 +974,20 @@
 
         function sendWhatsAppMessage() {
             const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
             const note = document.getElementById('cust-note').value.trim();
 
-            let message = currentOrderDetails;
-            if (name) message += `\n- *Name:* ${name}`;
-            if (note) message += `\n- *Notes:* ${note}`;
+            if (!name || !phone || !address) {
+                alert("Please fill in your Name, Mobile Number, and Delivery Address to continue.");
+                return;
+            }
+
+            let message = `${currentOrderDetails}\n\n*--- Customer & Delivery Details ---*`;
+            message += `\n👤 *Customer Name:* ${name}`;
+            message += `\n📞 *Contact Number:* ${phone}`;
+            message += `\n📍 *Delivery Address:* ${address}`;
+            if (note) message += `\n📝 *Special Instructions:* ${note}`;
 
             window.open(`https://wa.me/${bakeryPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
             closeModal();
