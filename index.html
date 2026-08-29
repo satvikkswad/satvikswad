@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satvik Swad | Pure, Fresh, Eggless Home Bakery</title>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary: #4A2E2B;
@@ -34,27 +33,37 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.4;
+            overflow-x: hidden;
         }
 
-        /* App Layout Frame */
         .app-container {
+            padding: 15px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 15px;
+            animation: fadeInPage 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Compact Top Bar & Hero Section */
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         header {
             background-color: var(--surface);
             border-radius: 12px;
             padding: 12px 20px;
-            box-shadow: 0 2px 10px rgba(74, 46, 43, 0.05);
+            box-shadow: 0 4px 15px rgba(74, 46, 43, 0.06);
             border-bottom: 2px solid var(--accent);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
             flex-wrap: wrap;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header:hover {
+            box-shadow: 0 8px 25px rgba(74, 46, 43, 0.1);
         }
 
         .brand-block {
@@ -68,6 +77,11 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .header-logo:hover {
+            transform: rotate(10deg) scale(1.08);
         }
 
         .logo-title {
@@ -98,14 +112,21 @@
             padding: 4px 10px;
             border-radius: 12px;
             border: 1px solid rgba(198, 139, 89, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            cursor: default;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            background-color: #EBDCD0;
         }
 
         .header-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
-        /* Dashboard Split Layout (Eye-View Optimized) */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -119,27 +140,41 @@
             }
         }
 
-        /* Side Promo Panel */
         .sidebar-card {
             background: var(--surface);
             border-radius: 12px;
             padding: 15px;
             border: 1px solid #EFE6DD;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(74, 46, 43, 0.08);
+        }
+
+        .promo-banner-container {
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
 
         .promo-banner-img {
             width: 100%;
             border-radius: 8px;
             object-fit: cover;
-            max-height: 280px;
-            margin-bottom: 12px;
+            display: block;
+            transition: transform 0.5s ease;
         }
 
-        /* Tab Switcher Navigation */
+        .sidebar-card:hover .promo-banner-img {
+            transform: scale(1.04);
+        }
+
         .tabs-header {
             display: flex;
             gap: 8px;
@@ -160,16 +195,20 @@
             color: var(--text-muted);
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
         }
 
         .tab-btn.active {
             background: var(--surface);
             color: var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transform: translateY(-1px);
         }
 
-        /* Filter Pills */
         .filter-container {
             display: flex;
             gap: 8px;
@@ -185,18 +224,24 @@
             font-size: 0.78rem;
             font-weight: 500;
             cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
         }
 
         .filter-btn.active {
             background: var(--accent);
             color: white;
+            box-shadow: 0 2px 8px rgba(198, 139, 89, 0.4);
         }
 
-        /* Dense Horizontal Menu Cards (Optimized space) */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
 
         @media(max-width: 600px) {
@@ -209,13 +254,24 @@
             background: var(--surface);
             border-radius: 10px;
             padding: 10px;
-            border-left: 3px solid var(--accent);
             display: flex;
             gap: 12px;
             align-items: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
             border: 1px solid #EFE6DD;
             border-left: 3px solid var(--accent);
+            opacity: 1;
+            transform: scale(1);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(74, 46, 43, 0.1);
+        }
+
+        .menu-item.filter-hidden {
+            display: none !important;
         }
 
         .item-image {
@@ -224,6 +280,12 @@
             border-radius: 8px;
             object-fit: cover;
             flex-shrink: 0;
+            background-color: #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.05);
         }
 
         .item-content {
@@ -277,20 +339,36 @@
             border: 1px solid #DDD5CE;
             background: var(--bg-light);
             font-size: 0.75rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .select-pack:focus {
+            border-color: var(--accent);
         }
 
         .order-item-btn {
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 500;
             cursor: pointer;
+            transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
         }
 
-        /* Buttons */
+        .order-item-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(122, 67, 29, 0.3);
+        }
+
+        .order-item-btn:active {
+            transform: scale(0.95);
+        }
+
         .cta-btn {
             background-color: var(--whatsapp-green);
             color: white;
@@ -305,6 +383,37 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
+            transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .cta-btn:active {
+            transform: scale(0.96);
+        }
+
+        .catalog-btn {
+            background: linear-gradient(135deg, #7A431D 0%, #C68B59 100%);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: transform 0.2s ease, box-shadow 0.25s ease;
+        }
+
+        .catalog-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(198, 139, 89, 0.4);
         }
 
         .insta-btn {
@@ -318,23 +427,41 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.25s ease;
         }
 
-        /* Section Tab Panels */
+        .insta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(220, 39, 67, 0.4);
+        }
+
         .tab-panel {
             display: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .tab-panel.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Compact Estimator */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin: 15px 0 10px;
+        }
+
         .estimator-card {
             background: var(--surface);
             border-radius: 12px;
             padding: 20px;
             border: 1px solid #EFE6DD;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
         .form-group {
@@ -349,25 +476,27 @@
             margin-bottom: 4px;
         }
 
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #DDD5CE;
-            font-size: 0.85rem;
+        .form-group input, .form-group select {
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
         }
 
-        /* Modal Overlay */
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 3px rgba(198, 139, 89, 0.2);
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.3s ease;
             z-index: 1000;
             padding: 15px;
         }
@@ -379,21 +508,35 @@
 
         .modal {
             background: var(--surface);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 24px;
+            border-radius: 14px;
             max-width: 400px;
             width: 100%;
             position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
         }
 
         .close-modal {
             position: absolute;
-            top: 10px;
+            top: 12px;
             right: 15px;
             background: none;
             border: none;
             font-size: 1.3rem;
             cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
         }
 
         footer {
@@ -408,10 +551,9 @@
 <body>
 
     <div class="app-container">
-        <!-- Compact Header -->
         <header>
             <div class="brand-block">
-                <img src="logo.jpeg" alt="Satvik Swad Logo" class="header-logo">
+                <img src="logo.jpeg" alt="Satvik Swad Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=100&auto=format&fit=crop&q=80'">
                 <div>
                     <h1 class="logo-title">Satvik Swad</h1>
                     <div class="tagline">Pure Food • Pure Devotion</div>
@@ -424,36 +566,36 @@
             </div>
 
             <div class="header-actions">
+                <a href="https://wa.me/c/919811591584" target="_blank" rel="noopener noreferrer" class="catalog-btn">🛍️ View Catalog</a>
                 <button class="cta-btn" onclick="openGeneralOrderModal()">💬 WhatsApp</button>
             </div>
         </header>
 
-        <!-- Eye-View Dashboard Grid -->
         <div class="dashboard-grid">
-            
-            <!-- Sidebar / Quick Promo View -->
+
             <div class="sidebar-card">
                 <div>
-                    <img src="bannerss.jpeg" alt="Satvik Swad Promo" class="promo-banner-img">
+                    <div class="promo-banner-container">
+                        <img src="WhatsApp Image 2026-08-06 at 10.02.10 PM.jpeg" alt="Satvik Swad Promo" class="promo-banner-img" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80'">
+                    </div>
                     <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--primary);">Freshly Baked Satvik Treats</h3>
                     <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Made fresh to order with premium pure ingredients and zero preservatives.</p>
                 </div>
-                <div style="margin-top: 12px; display: flex; gap: 8px;">
-                    <a href="https://instagram.com" target="_blank" class="insta-btn" style="width: 100%;">📸 Instagram</a>
+                <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                    <a href="https://wa.me/c/919811591584" target="_blank" rel="noopener noreferrer" class="catalog-btn" style="width: 100%;">🛍️ WhatsApp Catalog</a>
+                    <a href="https://www.instagram.com/satvik.sawad/" target="_blank" rel="noopener noreferrer" class="insta-btn" style="width: 100%;">📸 Instagram</a>
                 </div>
             </div>
 
-            <!-- Main Content Area with Navigation Tabs -->
             <div class="main-content">
-                
-                <!-- Tab Controls -->
+
                 <div class="tabs-header">
                     <button class="tab-btn active" onclick="switchTab('cookies-tab', this)">🍪 Cookies Menu</button>
-                    <button class="tab-btn" onclick="switchTab('estimator-tab', this)">🎂 Cake Estimator</button>
+                    <button class="tab-btn" onclick="switchTab('estimator-tab', this)">🎂 Cake Collection</button>
                     <button class="tab-btn" onclick="switchTab('special-tab', this)">🧁 Special Orders</button>
                 </div>
 
-                <!-- Tab 1: Cookies Menu Panel -->
+                <!-- Cookies Tab -->
                 <div id="cookies-tab" class="tab-panel active">
                     <div class="filter-container">
                         <button class="filter-btn active" onclick="filterMenu('all', this)">All</button>
@@ -462,20 +604,19 @@
                     </div>
 
                     <div class="menu-grid">
-                        
                         <div class="menu-item" data-category="classic" data-name="Coconut Cookies">
-                            <img src="coss.jpeg" alt="Coconut Cookies" class="item-image">
+                            <img src="coss.jpeg" alt="Coconut Cookies" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=150&auto=format&fit=crop&q=80'">
                             <div class="item-content">
                                 <div class="item-title-row">
                                     <span class="item-name">Coconut Cookies</span>
-                                    <span class="item-price">₹220</span>
+                                    <span class="item-price">₹170</span>
                                 </div>
                                 <p class="item-desc">Tropical & crisp cookie bites baked with coconut.</p>
                                 <div class="item-actions">
                                     <select class="select-pack">
-                                        <option value="250g">250g - ₹220</option>
-                                        <option value="500g">500g - ₹418</option>
-                                        <option value="1kg">1kg - ₹792</option>
+                                        <option value="200g">200g - ₹170</option>
+                                        <option value="250g">250g - ₹200</option>
+                                        <option value="500g">500g - ₹280</option>
                                     </select>
                                     <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
                                 </div>
@@ -483,18 +624,18 @@
                         </div>
 
                         <div class="menu-item" data-category="classic" data-name="Caffeine Free Chocolate">
-                            <img src="ccss.jpeg" alt="Chocolate Cookies" class="item-image">
+                            <img src="ccss.jpeg" alt="Chocolate Cookies" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=150&auto=format&fit=crop&q=80'">
                             <div class="item-content">
                                 <div class="item-title-row">
                                     <span class="item-name">Caffeine Free Choco</span>
-                                    <span class="item-price">₹250</span>
+                                    <span class="item-price">₹180</span>
                                 </div>
                                 <p class="item-desc">Deep chocolate flavor, 100% caffeine-free indulgence.</p>
                                 <div class="item-actions">
-                                    <select class="select-pack">
-                                        <option value="250g">250g - ₹250</option>
-                                        <option value="500g">500g - ₹475</option>
-                                        <option value="1kg">1kg - ₹900</option>
+                                     <select class="select-pack">
+                                        <option value="200g">200g - ₹180</option>
+                                        <option value="250g">250g - ₹220</option>
+                                        <option value="500g">500g - ₹420</option>
                                     </select>
                                     <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
                                 </div>
@@ -502,18 +643,18 @@
                         </div>
 
                         <div class="menu-item" data-category="classic" data-name="Almond Butter Cookies">
-                            <img src="butss.jpeg" alt="Almond Cookies" class="item-image">
+                            <img src="butss.jpeg" alt="Almond Cookies" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=150&auto=format&fit=crop&q=80'">
                             <div class="item-content">
                                 <div class="item-title-row">
                                     <span class="item-name">Almond Butter</span>
-                                    <span class="item-price">₹240</span>
+                                    <span class="item-price">₹160</span>
                                 </div>
                                 <p class="item-desc">Rich buttery goodness topped with roasted almonds.</p>
                                 <div class="item-actions">
-                                    <select class="select-pack">
-                                        <option value="250g">250g - ₹240</option>
-                                        <option value="500g">500g - ₹456</option>
-                                        <option value="1kg">1kg - ₹864</option>
+                                     <select class="select-pack">
+                                        <option value="200g">200g - ₹160</option>
+                                        <option value="250g">250g - ₹180</option>
+                                        <option value="500g">500g - ₹300</option>
                                     </select>
                                     <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
                                 </div>
@@ -521,18 +662,18 @@
                         </div>
 
                         <div class="menu-item" data-category="healthy" data-name="Healthy Oats & Nuts">
-                            <img src="pbss.jpeg" alt="Oats Cookies" class="item-image">
+                            <img src="oatss.jpg" alt="Oats Cookies" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=150&auto=format&fit=crop&q=80'">
                             <div class="item-content">
                                 <div class="item-title-row">
                                     <span class="item-name">Oats & Nuts</span>
-                                    <span class="item-price">₹230</span>
+                                    <span class="item-price">₹150</span>
                                 </div>
                                 <p class="item-desc">Wholesome, fiber-rich oats paired with nuts.</p>
                                 <div class="item-actions">
                                     <select class="select-pack">
-                                        <option value="250g">250g - ₹230</option>
-                                        <option value="500g">500g - ₹437</option>
-                                        <option value="1kg">1kg - ₹828</option>
+                                        <option value="200g">200g - ₹150</option>
+                                        <option value="250g">250g - ₹180</option>
+                                        <option value="500g">500g - ₹340</option>
                                     </select>
                                     <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
                                 </div>
@@ -540,18 +681,18 @@
                         </div>
 
                         <div class="menu-item" data-category="healthy" data-name="Traditional Atta Cookies">
-                            <img src="WhatsApp Image 2026-08-08 at 1.06.44 PM.jpeg" alt="Atta Cookies" class="item-image">
+                            <img src="aatss.jpeg" alt="Atta Cookies" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=150&auto=format&fit=crop&q=80'">
                             <div class="item-content">
                                 <div class="item-title-row">
                                     <span class="item-name">Traditional Atta</span>
-                                    <span class="item-price">₹210</span>
+                                    <span class="item-price">₹150</span>
                                 </div>
                                 <p class="item-desc">Nostalgic bakery-style whole wheat cookies.</p>
                                 <div class="item-actions">
-                                    <select class="select-pack">
-                                        <option value="250g">250g - ₹210</option>
-                                        <option value="500g">500g - ₹399</option>
-                                        <option value="1kg">1kg - ₹756</option>
+                                     <select class="select-pack">
+                                        <option value="200g">200g - ₹150</option>
+                                        <option value="250g">250g - ₹180</option>
+                                        <option value="500g">500g - ₹280</option>
                                     </select>
                                     <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
                                 </div>
@@ -559,18 +700,144 @@
                         </div>
 
                         <div class="menu-item" data-category="healthy" data-name="Nutritious Ragi Cookies">
-                            <img src="WhatsApp Image 2026-08-08 at 1.07.04 PM.jpeg" alt="Ragi Cookies" class="item-image">
+                            <img src="ragss.jpg" alt="Ragi Cookies" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=150&auto=format&fit=crop&q=80'">
                             <div class="item-content">
                                 <div class="item-title-row">
                                     <span class="item-name">Nutritious Ragi</span>
-                                    <span class="item-price">₹230</span>
+                                    <span class="item-price">₹160</span>
                                 </div>
                                 <p class="item-desc">Nutrient-dense millet cookies with wholesome crunch.</p>
                                 <div class="item-actions">
+                                     <select class="select-pack">
+                                        <option value="200g">200g - ₹160</option>
+                                        <option value="250g">250g - ₹210</option>
+                                        <option value="500g">500g - ₹370</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cakes Tab -->
+                <div id="estimator-tab" class="tab-panel">
+                    <h3 class="section-title">Fresh Dry & Tea Cakes (Eggless)</h3>
+                    <div class="menu-grid">
+
+                        <div class="menu-item" data-name="Chocolate Banana Walnut Cake">
+                            <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=200&auto=format&fit=crop&q=80" alt="Chocolate Banana Walnut Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Choco Banana Walnut</span>
+                                    <span class="item-price">₹520</span>
+                                </div>
+                                <p class="item-desc">Rich chocolate cake combined with banana and crunchy walnuts.</p>
+                                <div class="item-actions">
                                     <select class="select-pack">
-                                        <option value="250g">250g - ₹230</option>
-                                        <option value="500g">500g - ₹437</option>
-                                        <option value="1kg">1kg - ₹828</option>
+                                        <option value="500g">500g - ₹520</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item" data-name="Almond Dry Cake">
+                            <img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=200&auto=format&fit=crop&q=80" alt="Almond Dry Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Almond Dry Cake</span>
+                                    <span class="item-price">₹450</span>
+                                </div>
+                                <p class="item-desc">Classic dry cake loaded with crunch of premium almonds.</p>
+                                <div class="item-actions">
+                                    <select class="select-pack">
+                                        <option value="500g">500g - ₹450</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item" data-name="Caffeine Free Dry Chocolate Cake">
+                            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&auto=format&fit=crop&q=80" alt="Caffeine Free Dry Chocolate Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Caffeine Free Choco Dry</span>
+                                    <span class="item-price">₹450</span>
+                                </div>
+                                <p class="item-desc">Guilt-free chocolate dry cake, completely caffeine free.</p>
+                                <div class="item-actions">
+                                    <select class="select-pack">
+                                        <option value="500g">500g - ₹450</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item" data-name="Cashew Dry Cake">
+                            <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&auto=format&fit=crop&q=80" alt="Cashew Dry Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Cashew Dry Cake</span>
+                                    <span class="item-price">₹350</span>
+                                </div>
+                                <p class="item-desc">Soft, buttery cake generously topped with cashews.</p>
+                                <div class="item-actions">
+                                    <select class="select-pack">
+                                        <option value="500g">500g - ₹350</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item" data-name="Banana Walnut Cake">
+                            <img src="https://images.unsplash.com/photo-1586985289906-406988974504?w=200&auto=format&fit=crop&q=80" alt="Banana Walnut Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Banana Walnut Cake</span>
+                                    <span class="item-price">₹450</span>
+                                </div>
+                                <p class="item-desc">Moist banana cake loaded with roasted walnut pieces.</p>
+                                <div class="item-actions">
+                                    <select class="select-pack">
+                                        <option value="500g">500g - ₹450</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item" data-name="Red Velvet Dry Cake">
+                            <img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=200&auto=format&fit=crop&q=80" alt="Red Velvet Dry Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Red Velvet Dry Cake</span>
+                                    <span class="item-price">₹390</span>
+                                </div>
+                                <p class="item-desc">Rich red velvet baked to perfection into a dry cake.</p>
+                                <div class="item-actions">
+                                    <select class="select-pack">
+                                        <option value="500g">500g - ₹390</option>
+                                    </select>
+                                    <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item" data-name="Butterscotch Tea Cake">
+                            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&auto=format&fit=crop&q=80" alt="Butterscotch Tea Cake" class="item-image" onerror="this.src='IMG_20260829_124146.jpg'">
+                            <div class="item-content">
+                                <div class="item-title-row">
+                                    <span class="item-name">Butterscotch Tea Cake</span>
+                                    <span class="item-price">₹450</span>
+                                </div>
+                                <p class="item-desc">Aromatic butterscotch flavor made for tea-time pairing.</p>
+                                <div class="item-actions">
+                                    <select class="select-pack">
+                                        <option value="500g">500g - ₹450</option>
                                     </select>
                                     <button class="order-item-btn" onclick="quickOrder(this)">Order</button>
                                 </div>
@@ -580,41 +847,16 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: Compact Cake Estimator Panel -->
-                <div id="estimator-tab" class="tab-panel">
-                    <div class="estimator-card">
-                        <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 10px;">Custom Cake Estimator</h3>
-                        <div class="form-group">
-                            <label for="cake-weight">Select Weight</label>
-                            <select id="cake-weight" onchange="calculateCakeEstimate()">
-                                <option value="0.5">0.5 kg (Small Celebration)</option>
-                                <option value="1" selected>1.0 kg (Standard Party)</option>
-                                <option value="2">2.0 kg (Large Gathering)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="cake-flavor">Select Flavor</label>
-                            <select id="cake-flavor" onchange="calculateCakeEstimate()">
-                                <option value="550">Classic Vanilla Sponge</option>
-                                <option value="650" selected>Rich Chocolate Fudge</option>
-                                <option value="700">Fresh Fruit Delight</option>
-                                <option value="750">Butterscotch Crunch</option>
-                            </select>
-                        </div>
-                        <div style="background: var(--accent-light); padding: 15px; border-radius: 8px; text-align: center; margin-top: 15px;">
-                            <span style="font-size: 0.8rem; color: var(--text-muted);">Estimated Price</span>
-                            <div id="estimated-price" style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">₹650</div>
-                            <button class="cta-btn" style="margin-top: 8px; width: 100%;" onclick="orderCustomCake()">Inquire Custom Cake</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tab 3: Special Orders Panel -->
+                <!-- Special Orders Tab -->
                 <div id="special-tab" class="tab-panel">
                     <div class="estimator-card" style="text-align: center;">
-                        <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 8px;">Bespoke Cakes & Soft Muffins</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 15px;">All items are baked entirely fresh to order for your special events and theme parties.</p>
-                        <button class="cta-btn" onclick="openGeneralOrderModal()">💬 Message Us on WhatsApp</button>
+                        <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 8px;">Custom Celebration Cakes & Muffins</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 15px;">Explore our full WhatsApp product catalog or view our celebration bakes on Instagram.</p>
+                        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <a href="https://wa.me/c/919811591584" target="_blank" rel="noopener noreferrer" class="catalog-btn">🛍️ Browse WhatsApp Catalog</a>
+                            <a href="https://www.instagram.com/satvik.sawad/" target="_blank" rel="noopener noreferrer" class="insta-btn">📸 View Instagram</a>
+                            <button class="cta-btn" onclick="openGeneralOrderModal()">💬 Chat on WhatsApp</button>
+                        </div>
                     </div>
                 </div>
 
@@ -627,13 +869,12 @@
         </footer>
     </div>
 
-    <!-- WhatsApp Order Modal -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal">
             <button class="close-modal" onclick="closeModal()">&times;</button>
             <h3 style="color: var(--primary); font-family: 'Playfair Display', serif; margin-bottom: 8px;">Complete Order</h3>
             <p style="font-size: 0.8rem; margin-bottom: 12px; color: var(--text-muted);" id="modal-item-summary">Order Details</p>
-            
+
             <div class="form-group">
                 <label for="cust-name">Your Name</label>
                 <input type="text" id="cust-name" placeholder="Enter your name" style="width:100%; padding: 8px; border-radius:6px; border:1px solid #DDD5CE;">
@@ -649,14 +890,19 @@
     </div>
 
     <script>
-        const bakeryPhoneNumber = "919876543210";
+        const bakeryPhoneNumber = "9811591584";
         let currentOrderDetails = "";
 
         function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(button => button.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            const activePanel = document.getElementById(tabId);
+            activePanel.classList.add('active');
             btn.classList.add('active');
         }
 
@@ -665,20 +911,14 @@
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            items.forEach(item => {
+            items.forEach((item, index) => {
                 if (category === 'all' || item.dataset.category === category) {
-                    item.style.display = 'flex';
+                    item.classList.remove('filter-hidden');
+                    item.style.animation = `fadeInPage 0.4s ease forwards ${index * 0.05}s`;
                 } else {
-                    item.style.display = 'none';
+                    item.classList.add('filter-hidden');
                 }
             });
-        }
-
-        function calculateCakeEstimate() {
-            const weight = parseFloat(document.getElementById('cake-weight').value);
-            const baseRate = parseFloat(document.getElementById('cake-flavor').value);
-            const total = Math.round(weight * baseRate);
-            document.getElementById('estimated-price').innerText = `₹${total}`;
         }
 
         function quickOrder(button) {
@@ -692,24 +932,23 @@
             openModal();
         }
 
-        function orderCustomCake() {
-            const weightText = document.getElementById('cake-weight').selectedOptions[0].text;
-            const flavorText = document.getElementById('cake-flavor').selectedOptions[0].text;
-            const price = document.getElementById('estimated-price').innerText;
-
-            currentOrderDetails = `Hello Satvik Swad! I'm interested in a custom cake:\n- *Flavor:* ${flavorText}\n- *Size:* ${weightText}\n- *Estimated Cost:* ${price}`;
-            document.getElementById('modal-item-summary').innerText = `Custom Cake: ${flavorText} (${weightText})`;
-            openModal();
-        }
-
         function openGeneralOrderModal() {
             currentOrderDetails = "Hello Satvik Swad! I would like to inquire about your products.";
             document.getElementById('modal-item-summary').innerText = "General Order Inquiry";
             openModal();
         }
 
-        function openModal() { document.getElementById('orderModal').classList.add('active'); }
-        function closeModal() { document.getElementById('orderModal').classList.remove('active'); }
+        function openModal() { 
+            document.getElementById('orderModal').classList.add('active'); 
+        }
+        
+        function closeModal() { 
+            document.getElementById('orderModal').classList.remove('active'); 
+        }
+
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
 
         function sendWhatsAppMessage() {
             const name = document.getElementById('cust-name').value.trim();
